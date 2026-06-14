@@ -108,20 +108,23 @@ img { display: block; }
 @property --w3 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 @property --w4 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 
+/* hub is parked here and NEVER moves — only .wheel (inside) spins, so the
+   centring translate can't drift with the rotation. */
 .wheel-wrap {
   position: absolute;
   left: var(--wheel-x); top: var(--wheel-y);
   width: var(--wheel-size); height: var(--wheel-size);
-  transform: translate(-50%,-50%) rotate(0deg);
-  transition: transform 0.7s cubic-bezier(0.5,0.1,0.2,1);
+  transform: translate(-50%,-50%);
   filter: drop-shadow(0 0 60px rgba(0,0,0,0.35));
 }
 /* slice order clockwise from top: magenta, green, yellow, blue, red.
-   app.js sets the active slice to 120deg and the others to 60deg. */
+   app.js rotates this element about its centre + sets the active slice to
+   120deg (others 60deg). */
 .wheel {
   width: 100%; height: 100%; border-radius: 50%;
   --w0: 72deg; --w1: 72deg; --w2: 72deg; --w3: 72deg; --w4: 72deg;
-  transition: --w0 0.7s ease, --w1 0.7s ease, --w2 0.7s ease, --w3 0.7s ease, --w4 0.7s ease;
+  transform: rotate(0deg);
+  transition: transform 0.7s cubic-bezier(0.5,0.1,0.2,1), --w0 0.7s ease, --w1 0.7s ease, --w2 0.7s ease, --w3 0.7s ease, --w4 0.7s ease;
   background: conic-gradient(from -90deg,
     var(--zelu-magenta) 0deg                                                  var(--w0),
     var(--zelu-green)   var(--w0)                                             calc(var(--w0) + var(--w1)),

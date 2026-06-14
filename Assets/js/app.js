@@ -42,8 +42,11 @@
     current = i;
     panels.forEach(function (p, k) { p.classList.toggle('is-active', k === i); });
     var act = sliceOf[i];
-    if (wheel) for (var k = 0; k < 5; k++) wheel.style.setProperty('--w' + k, (k === act ? ACTIVE : OTHER) + 'deg');
-    if (wrap) wrap.style.transform = 'translate(-50%,-50%) rotate(' + (TARGET - (act * OTHER + ACTIVE / 2)) + 'deg)';
+    if (wheel) {
+      for (var k = 0; k < 5; k++) wheel.style.setProperty('--w' + k, (k === act ? ACTIVE : OTHER) + 'deg');
+      // rotate the wheel about its own centre — the fixed hub never moves
+      wheel.style.transform = 'rotate(' + (TARGET - (act * OTHER + ACTIVE / 2)) + 'deg)';
+    }
   }
   activate(0);
 
