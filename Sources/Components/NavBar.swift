@@ -1,20 +1,22 @@
 import Foundation
 import Ignite
 
-/// Fixed top navigation bar.
+/// Fixed top navigation bar (Ignite `Link`s).
 struct NavBar: HTML {
     let testflight: String
 
     var body: some HTML {
-        """
-        <nav class="nav">
-          <a class="nav-brand" href="#top">Zelu</a>
-          <div class="nav-links">
-            <a class="nav-sober" href="#story">Sobre o Zelu</a>
-            <a class="nav-sober" href="#faq">FAQ</a>
-            <a class="nav-cta" href="\(testflight)" target="_blank" rel="noopener">Baixe agora</a>
-          </div>
-        </nav>
-        """
+        Section {
+            Link("Zelu", target: "#top").class("nav-brand")
+
+            Section {
+                Link("Sobre o Zelu", target: "#story").class("nav-sober")
+                Link("FAQ", target: "#faq").class("nav-sober")
+                Link("Baixe agora", target: testflight)
+                    .target(.blank).relationship(.noOpener).class("nav-cta")
+            }
+            .class("nav-links")
+        }
+        .class("nav")
     }
 }

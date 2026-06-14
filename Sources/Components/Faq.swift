@@ -1,21 +1,22 @@
 import Foundation
 import Ignite
 
-/// FAQ accordion on a light card. Edit the questions in Sources/Content.swift.
+/// FAQ accordion on a light card. Structure via Ignite `ForEach`/`Section`/`Text`;
+/// the `<button>` stays raw so it doesn't pick up Bootstrap's `.btn` styles, and
+/// the +/- icon is a CSS-drawn `<span>`. Edit the questions in Sources/Content.swift.
 struct Faq: HTML {
     var body: some HTML {
         Section {
             Section {
-                "<h2 class=\"faq-head\">Perguntas frequentes</h2>"
+                Text("Perguntas frequentes").class("faq-head")
 
                 Section {
                     ForEach(faqs) { item in
-                        """
-                        <div class="faq-item">
-                          <button class="faq-q" aria-expanded="false">\(item.q)<span class="faq-icon"></span></button>
-                          <div class="faq-a"><p>\(item.a)</p></div>
-                        </div>
-                        """
+                        Section {
+                            "<button class=\"faq-q\" aria-expanded=\"false\">\(item.q)<span class=\"faq-icon\"></span></button>"
+                            Section { Text(item.a) }.class("faq-a")
+                        }
+                        .class("faq-item")
                     }
                 }
                 .class("faq-items")
