@@ -81,25 +81,27 @@ img { display: block; }
   .scroll-hint::after { animation: none; }
 }
 /* ============================================================
-   FEATURES — a fixed corner wheel + a pinned stage with phone/text.
+   FEATURES — the wheel is PLANTED inside the features section (not the
+   viewport), so you scroll *past* it like a normal page object:
 
-   .wheel-bg is position:fixed in the bottom-right corner, mostly
-   off-screen (only a corner shows). It is a SHARED background behind
-   the whole page: the opaque .hero (z2) and .site-footer (z2) cover it,
-   while .story and .faq (z1, transparent) let it show through — so the
-   wheel's edge stays visible from the features INTO the FAQ (continuity),
-   and is hidden in the hero and footer. It never scrolls, only spins.
+   - In the hero it isn't reached yet (it lives below, in .story).
+   - Leaving the hero it rises into view and the sticky .story-stage PINS
+     it in place; it sits still there (only spinning) while you scroll the
+     5 screens (the phone/text swap, the wheel rotates).
+   - When the screens end the stage releases and scrolls up with the page,
+     so the FAQ comes in and you still catch the wheel's lower edge.
+   It is anchored to its X/Y and never travels with the viewport.
 
-   .story is tall (scroll length); .story-stage is sticky, holding the
-   phone + the 5 stacked panels (only the active one shown). app.js reads
-   scroll position to swap the active panel + rotate the wheel to it.
+   .story is tall (scroll length); .story-stage is sticky and holds the
+   wheel + phone + the 5 stacked panels (only the active one shown).
    ============================================================ */
 
-/* fixed background layer: the wheel never moves with scroll, only rotates */
-.wheel-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-
-.story { position: relative; z-index: 1; height: 500vh; }   /* z1 + transparent so the wheel shows through */
+.story { position: relative; height: 500vh; }   /* scroll length = 5 screens */
 .story-stage { position: sticky; top: 0; height: 100vh; }
+
+/* the wheel lives inside the pinned stage (absolute), so it stays put with
+   the stage and leaves with it — never glued to the viewport */
+.wheel-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 
 /* animatable conic-gradient slice angles (active slice widens) */
 @property --w0 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }

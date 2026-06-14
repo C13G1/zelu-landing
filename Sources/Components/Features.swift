@@ -1,15 +1,17 @@
 import Foundation
 import Ignite
 
-/// Features: a pinned stage holding the phone + text for each screen.
-/// As you scroll `.story`, the stage stays put — only the active panel's
-/// phone + text cross-fade in, and the fixed corner wheel (rendered once
-/// in `Home` as the page background) rotates to face it.
-/// Edit the panels in Sources/Content.swift.
+/// Features: a sticky stage holding the planted wheel + the phone/text.
+/// As you scroll `.story`, the stage pins in place — the wheel spins and the
+/// active panel's phone + text cross-fade in; when the screens end the stage
+/// releases and scrolls away. Edit the panels in Sources/Content.swift.
 struct Features: HTML {
     var body: some HTML {
         Section {
             Section {
+                // the wheel is planted here, inside the pinned stage
+                "<div class=\"wheel-bg\"><div class=\"wheel-wrap\"><div class=\"wheel\"></div></div></div>"
+
                 ForEach(storyPanels) { p in
                     """
                     <article class="panel" style="--accent: var(--zelu-\(p.accent));">
