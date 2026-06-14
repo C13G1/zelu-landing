@@ -1,0 +1,18 @@
+/* ============================================================
+   FAQ — accordion on a light card (no wheel behind it anymore)
+   ============================================================ */
+
+.faq { position: relative; z-index: 1; padding: clamp(3rem,9vh,8rem) clamp(1rem,4vw,3rem) clamp(4rem,10vh,9rem); }
+.faq-list { position: relative; display: flex; flex-direction: column; align-items: center; gap: clamp(28px,4vw,57px); width: min(1325px, 94vw); margin: 0 auto; padding: clamp(22px,3.4vw,36px) clamp(1.4rem,3vw,3rem); border-radius: clamp(28px,5vw,68px); background: rgba(254,255,245,0.84); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.faq-head { width: min(788px, 100%); color: #101717; font-family: 'Bolota','Sora',sans-serif; font-weight: 240; font-size: var(--faq-head-size); line-height: 1.0; text-transform: uppercase; }
+.faq-items { display: flex; flex-direction: column; align-items: flex-start; gap: clamp(18px,2.4vw,31px); width: min(1161px, 100%); }
+.faq-item { width: 100%; border-bottom: 1px solid rgba(16,23,23,0.16); padding-bottom: clamp(18px,2.4vw,31px); }
+.faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+.faq-q { width: 100%; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0; font-family: 'Sora',sans-serif; font-weight: 700; text-align: left; font-size: var(--faq-q-size); color: #101717; }
+.faq-icon { flex: none; width: clamp(30px,2.6vw,40px); height: clamp(30px,2.6vw,40px); border-radius: 50%; border: 1.6px solid #101717; position: relative; }
+.faq-icon::before, .faq-icon::after { content: ''; position: absolute; left: 50%; top: 50%; background: #101717; border-radius: 2px; }
+.faq-icon::before { width: 44%; height: 2px; transform: translate(-50%,-50%); }
+.faq-icon::after { width: 2px; height: 44%; transform: translate(-50%,-50%) scaleY(1); transition: transform 0.3s ease; }
+.faq-item.open .faq-icon::after { transform: translate(-50%,-50%) scaleY(0); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-a p { padding-top: clamp(12px,1.6vw,18px); color: rgba(16,23,23,0.74); font-size: clamp(14px,1.2vw,18px); line-height: 1.55; max-width: 90ch; }
