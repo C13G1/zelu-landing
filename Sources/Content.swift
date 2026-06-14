@@ -8,20 +8,36 @@ import Foundation
 
 // MARK: - HERO IMAGES ------------------------------------------------
 //
-//  To ADD an image to the hero: append one line below.
-//    HeroImage(img: "blue", x: 30, y: 40)            // natural size
-//    HeroImage(img: "red",  x: 70, y: 55, size: 9)   // 9vw wide
+//  To ADD an image to the hero: append one line below. Two ways to place it:
+//    HeroImage(img: "blue", x: 30, y: 40, size: 8)          // % directly
+//    HeroImage(img: "red",  figmaX: 821, figmaY: 12, size: 8) // paste Figma X/Y
 //
-//  • img  = file name in Assets/images (WITHOUT .png)
-//           available: blue, red, greenF, greenM, pink, yellow
-//  • x/y  = position in % (0 = left/top, 100 = right/bottom)
-//  • size = OPTIONAL width in vw. Omit to keep the image's own size.
+//  • img    = file name in Assets/images (WITHOUT .png)
+//             available: blue, red, greenF, greenM, pink, yellow
+//  • x/y    = position in % (0 = left/top, 100 = right/bottom)
+//  • figmaX/figmaY = the X/Y shown in Figma Dev Mode for that ball; they get
+//                    auto-converted to % using the hero frame size (1603×966).
+//  • size   = OPTIONAL width in vw. Omit to keep the image's own size.
 
 struct HeroImage {
     let img: String
-    let x: Double
-    let y: Double
-    var size: Double? = nil
+    let x: Double          // % from left (0–100)
+    let y: Double          // % from top  (0–100)
+    var size: Double?      // width in vw; nil = natural size
+
+    /// Place using percentages directly.
+    init(img: String, x: Double, y: Double, size: Double? = nil) {
+        self.img = img; self.x = x; self.y = y; self.size = size
+    }
+
+    /// Place using Figma Dev-Mode X/Y — auto-converted to % against the
+    /// hero frame (width 1603 × height 966 in Figma). Just paste the numbers.
+    init(img: String, figmaX: Double, figmaY: Double, size: Double? = nil) {
+        self.img = img
+        self.x = figmaX / 1603 * 100
+        self.y = figmaY / 966 * 100
+        self.size = size
+    }
 }
 
 let heroImages: [HeroImage] = [

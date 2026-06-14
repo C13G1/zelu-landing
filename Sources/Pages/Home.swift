@@ -10,6 +10,10 @@ struct Home: StaticPage {
 
     var body: some HTML {
         Section {
+            // fixed corner wheel — shared background behind the whole page
+            // (the opaque hero/footer hide it; story+faq let it show through)
+            "<div class=\"wheel-bg\"><div class=\"wheel-wrap\"><div class=\"wheel\"></div></div></div>"
+
             NavBar(testflight: testflight)
             Hero(testflight: testflight)
             Features()

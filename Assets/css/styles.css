@@ -22,12 +22,13 @@
   /* --- HERO --- */
   --zelu-ball-size: clamp(240px, 33.5vw, 540px);  /* central flip card */
 
-  /* --- WHEEL + PHONE (the features section) --- */
-  --wheel-size: min(82vh, 88vw);  /* diameter — keep < viewport so it never crops */
-  --wheel-x:    62vw;             /* wheel centre, X */
-  --wheel-y:    50vh;             /* wheel centre, Y (50 = vertical middle) */
-  --phone-x:    58vw;            /* phone centre, X (over the wheel) */
-  --phone-h:    74vh;            /* phone height */
+  /* --- WHEEL + PHONE (Figma: wheel Ø = 1.85× phone height) --- */
+  --wheel-size: 166vh;           /* huge on purpose: hub sits off-screen, only a corner shows */
+  --wheel-x:    90.3vw;          /* wheel hub X — low-right corner (mostly off-screen) */
+  --wheel-y:    89vh;            /* wheel hub Y — low, so its edge still shows over the FAQ */
+  --phone-x:    62vw;            /* phone centre X — upper-left of the hub */
+  --phone-y:    48vh;            /* phone centre Y */
+  --phone-h:    90vh;            /* phone height */
 
   /* --- TEXT SIZES (one place to tune every heading/body) --- */
   --h2-size:        clamp(34px, 4.4vw, 60px);   /* feature headings */
@@ -80,17 +81,25 @@ img { display: block; }
   .scroll-hint::after { animation: none; }
 }
 /* ============================================================
-   FEATURES — a pinned stage: complete wheel + phone/text that swap.
+   FEATURES — a fixed corner wheel + a pinned stage with phone/text.
 
-   .story is tall (gives the scroll length). .story-stage is sticky,
-   so it stays fixed on screen while you scroll, then leaves with the
-   section. Inside: ONE complete wheel (centred, never cropped) + the
-   5 panels stacked, only the active one shown. app.js picks the active
-   panel from scroll position and rotates the wheel to face its phone.
+   .wheel-bg is position:fixed in the bottom-right corner, mostly
+   off-screen (only a corner shows). It is a SHARED background behind
+   the whole page: the opaque .hero (z2) and .site-footer (z2) cover it,
+   while .story and .faq (z1, transparent) let it show through — so the
+   wheel's edge stays visible from the features INTO the FAQ (continuity),
+   and is hidden in the hero and footer. It never scrolls, only spins.
+
+   .story is tall (scroll length); .story-stage is sticky, holding the
+   phone + the 5 stacked panels (only the active one shown). app.js reads
+   scroll position to swap the active panel + rotate the wheel to it.
    ============================================================ */
 
-.story { position: relative; height: 500vh; }            /* scroll length = 5 screens */
-.story-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+/* fixed background layer: the wheel never moves with scroll, only rotates */
+.wheel-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+.story { position: relative; z-index: 1; height: 500vh; }   /* z1 + transparent so the wheel shows through */
+.story-stage { position: sticky; top: 0; height: 100vh; }
 
 /* animatable conic-gradient slice angles (active slice widens) */
 @property --w0 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
@@ -129,7 +138,7 @@ img { display: block; }
 .panel-tag::before { content: ''; width: 0.85em; height: 0.85em; border-radius: 50%; background: var(--accent, var(--zelu-red)); }
 .panel-copy h2 { font-family: 'Bolota','Sora',sans-serif; font-weight: 240; font-size: var(--h2-size); line-height: 1.0; text-transform: uppercase; }
 .panel-copy p { font-family: 'Sora',sans-serif; font-weight: 400; font-size: var(--body-size); line-height: 1.21; letter-spacing: 0.38px; opacity: 0.92; }
-.panel-phone { position: absolute; left: var(--phone-x); top: 50%; transform: translate(-50%,-50%); height: var(--phone-h); width: auto; z-index: 2; filter: drop-shadow(0 24px 50px rgba(0,0,0,0.5)); }
+.panel-phone { position: absolute; left: var(--phone-x); top: var(--phone-y); transform: translate(-50%,-50%); height: var(--phone-h); width: auto; z-index: 2; filter: drop-shadow(0 24px 50px rgba(0,0,0,0.5)); }
 
 @media (prefers-reduced-motion: reduce) {
   .wheel, .wheel-wrap, .panel { transition: none; }
