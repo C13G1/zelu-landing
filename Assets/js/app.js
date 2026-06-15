@@ -71,7 +71,7 @@
     const sliceOf = [0, 1, 2, 3, 4];
     const ACTIVE = 120;     // active slice angle in degrees
     const OTHER  = 60;      // inactive slice angle
-    const TARGET = 40;      // rotation offset so the active slice points up
+    const TARGET = 60;  // rotation offset — positions the active slice toward upper-right
 
     function activate(i) {
         if (i === current) return;
