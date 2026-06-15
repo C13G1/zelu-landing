@@ -66,9 +66,9 @@
     let current = -1;
 
     // which wheel slice (0–4) lights up for each panel
-    // panels are ordered: red, blue, yellow, green, pink
-    // slices are ordered: pink, green, yellow, blue, red (clockwise from top)
-    const sliceOf = [4, 3, 2, 1, 0];
+    // panels and slices share the same order now (pink, green, red, yellow, blue),
+    // so each panel lights the slice with the same index
+    const sliceOf = [0, 1, 2, 3, 4];
     const ACTIVE = 120;     // active slice angle in degrees
     const OTHER  = 60;      // inactive slice angle
     const TARGET = 40;      // rotation offset so the active slice points up

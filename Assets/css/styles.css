@@ -294,7 +294,7 @@ img {
     filter: drop-shadow(0 0 60px rgba(0, 0, 0, 0.35));
 }
 
-/* slices clockwise from top: pink → green → yellow → blue → red */
+/* slice order matches the panel scroll order: pink → green → red → yellow → blue */
 .wheel {
     width: 100%;
     height: 100%;
@@ -315,9 +315,9 @@ img {
     background: conic-gradient(from -90deg,
         var(--zelu-pink)   0deg                                                  var(--w0),
         var(--zelu-green)  var(--w0)                                             calc(var(--w0) + var(--w1)),
-        var(--zelu-yellow) calc(var(--w0) + var(--w1))                           calc(var(--w0) + var(--w1) + var(--w2)),
-        var(--zelu-blue)   calc(var(--w0) + var(--w1) + var(--w2))               calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)),
-        var(--zelu-red)    calc(var(--w0) + var(--w1) + var(--w2) + var(--w3))   360deg);
+        var(--zelu-red)    calc(var(--w0) + var(--w1))                           calc(var(--w0) + var(--w1) + var(--w2)),
+        var(--zelu-yellow) calc(var(--w0) + var(--w1) + var(--w2))               calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)),
+        var(--zelu-blue)   calc(var(--w0) + var(--w1) + var(--w2) + var(--w3))   360deg);
 }
 
 .panel {
