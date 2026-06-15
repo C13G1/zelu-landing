@@ -17,20 +17,50 @@ struct HeroImage {
     /// hero frame (width 1603 × height 966 in Figma). Just paste the numbers.
     init(img: String, figmaX: Double, figmaY: Double, size: Double? = nil) {
         self.img = img
-        self.x = ((57 + figmaX) / 1603) * 100
-        self.y = ((119 + figmaY) / 966) * 100
+        self.x = ((20 + figmaX) / 1603) * 100
+        self.y = ((40 + figmaY) / 966) * 100
         self.size = size
     }
 }
 
 let heroImages: [HeroImage] = [
-    // top band
+    
+    // lauras
     HeroImage(img: "yellow", figmaX: 0,  figmaY: 6),
     HeroImage(img: "yellow", figmaX: 115,  figmaY: 165),
     HeroImage(img: "yellow", figmaX: 461,  figmaY: 678),
     HeroImage(img: "yellow", figmaX: 821,  figmaY: 12),
     HeroImage(img: "yellow", figmaX: 1027,  figmaY: 615),
     HeroImage(img: "yellow", figmaX: 1373,  figmaY: 574),
+    
+    //osmars
+    HeroImage(img: "greenM", figmaX: 87, figmaY: 402),
+    HeroImage(img: "greenM", figmaX: 1053, figmaY: 65),
+    HeroImage(img: "greenM", figmaX: 1164, figmaY: 462),
+    
+    //juliana
+    HeroImage(img: "greenF", figmaX: 17, figmaY: 719),
+    HeroImage(img: "greenF", figmaX: 386, figmaY: 154),
+    HeroImage(img: "greenF", figmaX: 561, figmaY: 0),
+    HeroImage(img: "greenF", figmaX: 946, figmaY: 750),
+    
+    //thais
+    HeroImage(img: "pink", figmaX: 252, figmaY: 605),
+    HeroImage(img: "pink", figmaX: 1218, figmaY: 267),
+    HeroImage(img: "pink", figmaX: 1398, figmaY: 463),
+    
+    //ed
+    HeroImage(img: "blue", figmaX: 304, figmaY: 349),
+    HeroImage(img: "blue", figmaX: 292, figmaY: 720),
+    HeroImage(img: "blue", figmaX: 1312, figmaY: 29),
+    HeroImage(img: "blue", figmaX: 1425, figmaY: 267),
+    HeroImage(img: "blue", figmaX: 1335, figmaY: 733),
+    
+    //larissas
+    HeroImage(img: "red", figmaX: 292, figmaY: 27),
+    HeroImage(img: "red", figmaX: 657, figmaY: 703),
+    HeroImage(img: "red", figmaX: 1159, figmaY: 717),
+    HeroImage(img: "red", figmaX: 1486, figmaY: 66),
 
 ]
 
