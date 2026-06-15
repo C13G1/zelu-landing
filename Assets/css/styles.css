@@ -20,7 +20,7 @@
     --zelu-ball-size: 480px;
 
     /* wheel + phone */
-    --wheel-size: 166vh;    /* large: hub sits off-screen, only the edge shows */
+    --wheel-size: 156vh;    /* ≈ Figma 1401px; hub off-screen down-right, only the edge shows */
     --wheel-x:    90.3vw;   /* hub X position */
     --wheel-y:    89vh;     /* hub Y position */
     --phone-x:    80vw;     /* phone centre X */
