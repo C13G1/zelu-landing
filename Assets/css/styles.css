@@ -475,7 +475,7 @@ img {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 2px solid #101717;
+    background: #101717;
     position: relative;
 }
 
@@ -485,7 +485,7 @@ img {
     position: absolute;
     left: 50%;
     top: 50%;
-    background: #101717;
+    background: var(--zelu-cream);
     border-radius: 2px;
 }
 
