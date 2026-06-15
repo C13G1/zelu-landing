@@ -1,23 +1,6 @@
 import Foundation
 
-// =============================================================
-//  CONTENT — edit EVERYTHING here: hero images, feature texts, FAQ.
-//  Sizes (fonts, wheel, phone) live in Assets/css/base.css (:root vars).
-// =============================================================
-
-
-// MARK: - HERO IMAGES ------------------------------------------------
-//
-//  To ADD an image to the hero: append one line below. Two ways to place it:
-//    HeroImage(img: "blue", x: 30, y: 40, size: 8)          // % directly
-//    HeroImage(img: "red",  figmaX: 821, figmaY: 12, size: 8) // paste Figma X/Y
-//
-//  • img    = file name in Assets/images (WITHOUT .png)
-//             available: blue, red, greenF, greenM, pink, yellow
-//  • x/y    = position in % (0 = left/top, 100 = right/bottom)
-//  • figmaX/figmaY = the X/Y shown in Figma Dev Mode for that ball; they get
-//                    auto-converted to % using the hero frame size (1603×966).
-//  • size   = OPTIONAL width in vw. Omit to keep the image's own size.
+// MARK: - HERO IMAGES
 
 struct HeroImage {
     let img: String
@@ -34,41 +17,25 @@ struct HeroImage {
     /// hero frame (width 1603 × height 966 in Figma). Just paste the numbers.
     init(img: String, figmaX: Double, figmaY: Double, size: Double? = nil) {
         self.img = img
-        self.x = figmaX / 1603 * 100
-        self.y = figmaY / 966 * 100
+        self.x = ((57 + figmaX) / 1603) * 100
+        self.y = ((119 + figmaY) / 966) * 100
         self.size = size
     }
 }
 
 let heroImages: [HeroImage] = [
     // top band
-    HeroImage(img: "yellow", x: 6,  y: 9,  size: 7),
-    HeroImage(img: "red",    x: 20, y: 5,  size: 6),
-    HeroImage(img: "greenM", x: 34, y: 10, size: 8),
-    HeroImage(img: "blue",   x: 66, y: 7,  size: 8),
-    HeroImage(img: "pink",   x: 80, y: 6,  size: 6),
-    HeroImage(img: "yellow", x: 92, y: 12, size: 7),
-    // upper sides
-    HeroImage(img: "greenF", x: 12, y: 26, size: 9),
-    HeroImage(img: "blue",   x: 27, y: 22, size: 6),
-    HeroImage(img: "red",    x: 73, y: 24, size: 6),
-    HeroImage(img: "yellow", x: 88, y: 30, size: 9),
-    // mid sides (centre kept clear for the logo)
-    HeroImage(img: "pink",   x: 5,  y: 50, size: 7),
-    HeroImage(img: "greenM", x: 95, y: 52, size: 8),
-    // lower band
-    HeroImage(img: "blue",   x: 10, y: 72, size: 8),
-    HeroImage(img: "yellow", x: 26, y: 78, size: 6),
-    HeroImage(img: "red",    x: 60, y: 82, size: 7),
-    HeroImage(img: "greenF", x: 74, y: 74, size: 9),
-    HeroImage(img: "pink",   x: 90, y: 70, size: 6),
+    HeroImage(img: "yellow", figmaX: 0,  figmaY: 6),
+    HeroImage(img: "yellow", figmaX: 115,  figmaY: 165),
+    HeroImage(img: "yellow", figmaX: 461,  figmaY: 678),
+    HeroImage(img: "yellow", figmaX: 821,  figmaY: 12),
+    HeroImage(img: "yellow", figmaX: 1027,  figmaY: 615),
+    HeroImage(img: "yellow", figmaX: 1373,  figmaY: 574),
+
 ]
 
 
-// MARK: - FEATURE PANELS ---------------------------------------------
-//
-//  The 5 feature screens. The wheel slice + accent dot use `accent`
-//  (a brand colour name). titleHTML may contain <br> for line breaks.
+// MARK: - FEATURE PANELS
 
 struct Panel {
     let tag: String
@@ -97,7 +64,7 @@ let storyPanels: [Panel] = [
 ]
 
 
-// MARK: - FAQ --------------------------------------------------------
+// MARK: - FAQ
 
 let faqs: [(q: String, a: String)] = [
     ("O Zelu é gratuito?",

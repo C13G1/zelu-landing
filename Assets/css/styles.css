@@ -16,13 +16,13 @@
   --zelu-blue:    #2196bc;
   --zelu-yellow:  #d4930f;
   --zelu-green:   #2bb673;
-  --zelu-magenta: #e23e6d;
+  --zelu-pink:    #e23e6d;
   --zelu-cream:   #fefff5;
 
   /* --- HERO --- */
   --zelu-ball-size: clamp(240px, 33.5vw, 540px);  /* central flip card */
 
-  /* --- WHEEL + PHONE (Figma: wheel Ø = 1.85× phone height) --- */
+  /* --- WHEEL + PHONE (Figma: wheel 0 = 1.85× phone height) --- */
   --wheel-size: 166vh;           /* huge on purpose: hub sits off-screen, only a corner shows */
   --wheel-x:    90.3vw;          /* wheel hub X — low-right corner (mostly off-screen) */
   --wheel-y:    89vh;            /* wheel hub Y — low, so its edge still shows over the FAQ */
@@ -39,20 +39,77 @@
   --footer-word:    clamp(72px, 20vw, 300px);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-html, body { width: 100%; overflow-x: clip; background: var(--zelu-bg); font-family: 'Sora', sans-serif; color: var(--zelu-cream); }
-.container, .container-fluid, .ig-main-content { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
-img { display: block; }
-[id] { scroll-margin-top: 90px; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: clip;
+    background: var(--zelu-bg);
+    font-family: 'Sora', sans-serif;
+    color: var(--zelu-cream);
+}
+
+.container, .container-fluid, .ig-main-content {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+img {
+    display: block;
+}
+
+[id] {
+    scroll-margin-top: 90px;
+}
 
 /* ===================== NAV ===================== */
-.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem clamp(1.2rem, 4vw, 3.5rem); }
-.nav-brand { font-family: 'Bolota','Sora',sans-serif; font-size: clamp(20px,1.8vw,30px); color: var(--zelu-cream); text-decoration: none; }
-.nav-links { display: flex; align-items: center; gap: clamp(1rem,2.6vw,2.6rem); }
-.nav-links a { color: var(--zelu-cream); text-decoration: none; font-size: clamp(12px,0.95vw,15px); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; transition: opacity 0.2s; }
+.nav {
+    position: fixed;
+    top: 0; left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem clamp(1.2rem, 4vw, 3.5rem);
+}
+
+.nav-brand {
+    font-family: 'Bolota','Sora',sans-serif;
+    font-size: clamp(20px,1.8vw,30px);
+    color: var(--zelu-cream);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem,2.6vw,2.6rem);
+}
+
+.nav-links a {
+    color: var(--zelu-cream);
+    text-decoration: none;
+    font-size: clamp(12px,0.95vw,15px);
+    font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; opacity: 0.85;
+    transition: opacity 0.2s;
+}
+
 .nav-links a:hover { opacity: 1; }
+
 .nav-cta { background: var(--zelu-red); color: var(--zelu-cream) !important; padding: 0.6em 1.3em; border-radius: 999px; opacity: 1 !important; }
+
 /* ============================================================
    HERO — orbit of avatars + central 3D flip card
    ============================================================ */
@@ -119,7 +176,7 @@ img { display: block; }
   transform: translate(-50%,-50%);
   filter: drop-shadow(0 0 60px rgba(0,0,0,0.35));
 }
-/* slice order clockwise from top: magenta, green, yellow, blue, red.
+/* slice order clockwise from top: pink, green, yellow, blue, red.
    app.js rotates this element about its centre + sets the active slice to
    120deg (others 60deg). */
 .wheel {
@@ -128,7 +185,7 @@ img { display: block; }
   transform: rotate(0deg);
   transition: transform 0.7s cubic-bezier(0.5,0.1,0.2,1), --w0 0.7s ease, --w1 0.7s ease, --w2 0.7s ease, --w3 0.7s ease, --w4 0.7s ease;
   background: conic-gradient(from -90deg,
-    var(--zelu-magenta) 0deg                                                  var(--w0),
+    var(--zelu-pink) 0deg                                                  var(--w0),
     var(--zelu-green)   var(--w0)                                             calc(var(--w0) + var(--w1)),
     var(--zelu-yellow)  calc(var(--w0) + var(--w1))                           calc(var(--w0) + var(--w1) + var(--w2)),
     var(--zelu-blue)    calc(var(--w0) + var(--w1) + var(--w2))               calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)),
