@@ -23,14 +23,14 @@
     --wheel-size: 166vh;    /* large: hub sits off-screen, only the edge shows */
     --wheel-x:    90.3vw;   /* hub X position */
     --wheel-y:    89vh;     /* hub Y position */
-    --phone-x:    62vw;     /* phone centre X */
-    --phone-y:    48vh;     /* phone centre Y */
-    --phone-h:    90vh;     /* phone height */
+    --phone-x:    80vw;     /* phone centre X */
+    --phone-y:    38vh;     /* phone centre Y */
+    --phone-h:    150vh;    /* phone height (device ≈ Figma 473×951) */
 
     /* text sizes */
-    --h2-size:       56px;
-    --body-size:     20px;
-    --copy-width:    560px;
+    --h2-size:       64px;
+    --body-size:     28px;
+    --copy-width:    788px;
     --faq-head-size: 60px;
     --faq-q-size:    28px;
     --footer-word:   280px;
@@ -338,7 +338,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 28px;
+    gap: 57px;
     width: var(--copy-width);
     z-index: 3;
 }
@@ -366,7 +366,9 @@ img {
     font-family: 'Bolota', 'Sora', sans-serif;
     font-weight: 240;
     font-size: var(--h2-size);
-    line-height: 1.0;
+    line-height: normal;
+    letter-spacing: 0.38px;
+    font-feature-settings: 'liga' off, 'clig' off;
     text-transform: uppercase;
 }
 
@@ -374,9 +376,9 @@ img {
     font-family: 'Sora', sans-serif;
     font-weight: 400;
     font-size: var(--body-size);
-    line-height: 1.21;
+    line-height: 34px;
     letter-spacing: 0.38px;
-    opacity: 0.92;
+    font-feature-settings: 'liga' off, 'clig' off;
 }
 
 .panel-phone {
