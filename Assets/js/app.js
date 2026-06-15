@@ -1,75 +1,123 @@
 (function () {
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ===== Hero: only the balls near the cursor drift away from it =====
-  var orbit = document.querySelector('.orbit');
-  if (orbit && !reduce) {
-    var balls = Array.prototype.slice.call(orbit.querySelectorAll('.ball'));
-    var st = balls.map(function () { return { bx: 0, by: 0, cx: 0, cy: 0, tx: 0, ty: 0 }; });
-    var mx = -9999, my = -9999, raf = null, RADIUS = 210, PUSH = 38;
-    function measure() { for (var i = 0; i < balls.length; i++) { var r = balls[i].getBoundingClientRect(); st[i].bx = r.left + r.width/2 - st[i].cx; st[i].by = r.top + r.height/2 - st[i].cy; } }
-    function loop() {
-      var moving = false;
-      for (var i = 0; i < balls.length; i++) {
-        var s = st[i], dx = s.bx - mx, dy = s.by - my, d = Math.sqrt(dx*dx + dy*dy);
-        if (d < RADIUS && d > 0.01) { var f = 1 - d/RADIUS; s.tx = dx/d*f*PUSH; s.ty = dy/d*f*PUSH; } else { s.tx = 0; s.ty = 0; }
-        s.cx += (s.tx - s.cx) * 0.15; s.cy += (s.ty - s.cy) * 0.15;
-        balls[i].style.transform = 'translate(' + s.cx.toFixed(2) + 'px,' + s.cy.toFixed(2) + 'px)';
-        if (Math.abs(s.tx - s.cx) > 0.05 || Math.abs(s.ty - s.cy) > 0.05) moving = true;
-      }
-      if (moving) raf = requestAnimationFrame(loop); else raf = null;
+    // --- Hero: balls near the cursor drift away from it ---
+
+    const orbit = document.querySelector('.orbit');
+
+    if (orbit && !reduceMotion) {
+        const balls  = [...orbit.querySelectorAll('.ball')];
+        const state  = balls.map(() => ({ bx: 0, by: 0, cx: 0, cy: 0, tx: 0, ty: 0 }));
+        const RADIUS = 210;     // px — cursor must be this close to push a ball
+        const PUSH   = 38;      // px — max push distance
+        let mx = -9999, my = -9999, raf = null;
+
+        // record each ball's natural centre so we can measure how far to push it
+        function measure() {
+            for (let i = 0; i < balls.length; i++) {
+                const r = balls[i].getBoundingClientRect();
+                state[i].bx = r.left + r.width  / 2 - state[i].cx;
+                state[i].by = r.top  + r.height / 2 - state[i].cy;
+            }
+        }
+
+        function loop() {
+            let moving = false;
+
+            for (let i = 0; i < balls.length; i++) {
+                const s     = state[i];
+                const dx    = s.bx - mx;
+                const dy    = s.by - my;
+                const dist  = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < RADIUS && dist > 0.01) {
+                    const force = 1 - dist / RADIUS;
+                    s.tx = (dx / dist) * force * PUSH;
+                    s.ty = (dy / dist) * force * PUSH;
+                } else {
+                    s.tx = 0;
+                    s.ty = 0;
+                }
+
+                // smoothly lerp current offset toward target
+                s.cx += (s.tx - s.cx) * 0.15;
+                s.cy += (s.ty - s.cy) * 0.15;
+                balls[i].style.transform = `translate(${s.cx.toFixed(2)}px, ${s.cy.toFixed(2)}px)`;
+
+                if (Math.abs(s.tx - s.cx) > 0.05 || Math.abs(s.ty - s.cy) > 0.05) moving = true;
+            }
+
+            raf = moving ? requestAnimationFrame(loop) : null;
+        }
+
+        window.addEventListener('mousemove',  (e) => { mx = e.clientX; my = e.clientY; if (!raf) raf = requestAnimationFrame(loop); }, { passive: true });
+        window.addEventListener('mouseleave', ()  => { mx = -9999; my = -9999;          if (!raf) raf = requestAnimationFrame(loop); });
+        window.addEventListener('resize', measure);
+        window.addEventListener('load',   measure);
+        measure();
     }
-    window.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; if (!raf) raf = requestAnimationFrame(loop); }, { passive: true });
-    window.addEventListener('mouseleave', function () { mx = -9999; my = -9999; if (!raf) raf = requestAnimationFrame(loop); });
-    window.addEventListener('resize', measure);
-    window.addEventListener('load', measure);
-    measure();
-  }
 
-  // ===== Features: stage stays pinned; scroll swaps the active panel + spins the wheel =====
-  var story = document.querySelector('.story');
-  var wheel = document.querySelector('.wheel');
-  var wrap = document.querySelector('.wheel-wrap');
-  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
-  var N = panels.length, current = -1;
+    // --- Features: scroll progress swaps the active panel and spins the wheel ---
 
-  // each panel's colour -> its conic slice index (magenta,green,yellow,blue,red)
-  var sliceOf = [4, 3, 2, 1, 0];           // panel order: red,blue,yellow,green,magenta
-  var ACTIVE = 120, OTHER = 60, TARGET = 40;
+    const story  = document.querySelector('.story');
+    const wheel  = document.querySelector('.wheel');
+    const panels = [...document.querySelectorAll('.panel')];
+    const N = panels.length;
+    let current = -1;
 
-  function activate(i) {
-    if (i === current) return;
-    current = i;
-    panels.forEach(function (p, k) { p.classList.toggle('is-active', k === i); });
-    var act = sliceOf[i];
-    if (wheel) {
-      for (var k = 0; k < 5; k++) wheel.style.setProperty('--w' + k, (k === act ? ACTIVE : OTHER) + 'deg');
-      // rotate the wheel about its own centre — the fixed hub never moves
-      wheel.style.transform = 'rotate(' + (TARGET - (act * OTHER + ACTIVE / 2)) + 'deg)';
+    // which wheel slice (0–4) lights up for each panel
+    // panels are ordered: red, blue, yellow, green, pink
+    // slices are ordered: pink, green, yellow, blue, red (clockwise from top)
+    const sliceOf = [4, 3, 2, 1, 0];
+    const ACTIVE = 120;     // active slice angle in degrees
+    const OTHER  = 60;      // inactive slice angle
+    const TARGET = 40;      // rotation offset so the active slice points up
+
+    function activate(i) {
+        if (i === current) return;
+        current = i;
+
+        panels.forEach((p, k) => p.classList.toggle('is-active', k === i));
+
+        if (wheel) {
+            const active = sliceOf[i];
+
+            for (let k = 0; k < 5; k++) {
+                wheel.style.setProperty(`--w${k}`, (k === active ? ACTIVE : OTHER) + 'deg');
+            }
+
+            // spin the inner wheel so the active slice faces up — the hub never moves
+            wheel.style.transform = `rotate(${TARGET - (active * OTHER + ACTIVE / 2)}deg)`;
+        }
     }
-  }
-  activate(0);
 
-  if (story && N) {
-    var ticking = false;
-    function onScroll() {
-      var r = story.getBoundingClientRect();
-      var p = Math.min(1, Math.max(0, -r.top / ((r.height - window.innerHeight) || 1)));
-      activate(Math.min(N - 1, Math.round(p * (N - 1))));
-      ticking = false;
+    activate(0);
+
+    if (story && N) {
+        let ticking = false;
+
+        function onScroll() {
+            const r        = story.getBoundingClientRect();
+            const progress = Math.min(1, Math.max(0, -r.top / ((r.height - window.innerHeight) || 1)));
+            activate(Math.min(N - 1, Math.round(progress * (N - 1))));
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+        window.addEventListener('resize', onScroll);
+        onScroll();
     }
-    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
-    window.addEventListener('resize', onScroll);
-    onScroll();
-  }
 
-  // ===== FAQ accordion =====
-  Array.prototype.slice.call(document.querySelectorAll('.faq-item')).forEach(function (item) {
-    var q = item.querySelector('.faq-q'), a = item.querySelector('.faq-a');
-    q.addEventListener('click', function () {
-      var open = item.classList.toggle('open');
-      q.setAttribute('aria-expanded', open ? 'true' : 'false');
-      a.style.maxHeight = open ? a.scrollHeight + 'px' : '0px';
+    // --- FAQ: click a question to expand or collapse its answer ---
+
+    [...document.querySelectorAll('.faq-item')].forEach((item) => {
+        const q = item.querySelector('.faq-q');
+        const a = item.querySelector('.faq-a');
+
+        q.addEventListener('click', () => {
+            const open = item.classList.toggle('open');
+            q.setAttribute('aria-expanded', String(open));
+            a.style.maxHeight = open ? a.scrollHeight + 'px' : '0px';
+        });
     });
-  });
 })();

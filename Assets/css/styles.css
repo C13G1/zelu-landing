@@ -1,7 +1,4 @@
-/* ============================================================
-   BASE — fonts, brand colours, SIZE KNOBS, reset, nav.
-   Want to resize something? Change a variable in :root below.
-   ============================================================ */
+/* To resize anything, change a variable in :root below. */
 
 @font-face {
     font-family: 'Bolota';
@@ -10,7 +7,7 @@
 }
 
 :root {
-    /* --- brand colours --- */
+    /* colours */
     --zelu-bg:      #101717;
     --zelu-red:     #df2a1d;
     --zelu-blue:    #2196bc;
@@ -19,21 +16,21 @@
     --zelu-pink:    #e23e6d;
     --zelu-cream:   #fefff5;
 
-    /* --- HERO --- */
-    --zelu-ball-size: 480px;    /* central flip card */
+    /* hero */
+    --zelu-ball-size: 480px;
 
-    /* --- WHEEL + PHONE (Figma: wheel diameter = 1.85x phone height) --- */
-    --wheel-size: 166vh;        /* huge on purpose: hub sits off-screen, only a corner shows */
-    --wheel-x:    90.3vw;       /* wheel hub X — low-right corner (mostly off-screen) */
-    --wheel-y:    89vh;         /* wheel hub Y — low, so its edge still shows over the FAQ */
-    --phone-x:    62vw;         /* phone centre X — upper-left of the hub */
-    --phone-y:    48vh;         /* phone centre Y */
-    --phone-h:    90vh;         /* phone height */
+    /* wheel + phone */
+    --wheel-size: 166vh;    /* large: hub sits off-screen, only the edge shows */
+    --wheel-x:    90.3vw;   /* hub X position */
+    --wheel-y:    89vh;     /* hub Y position */
+    --phone-x:    62vw;     /* phone centre X */
+    --phone-y:    48vh;     /* phone centre Y */
+    --phone-h:    90vh;     /* phone height */
 
-    /* --- TEXT SIZES (one place to tune every heading/body) --- */
-    --h2-size:       56px;      /* feature headings */
-    --body-size:     20px;      /* feature paragraphs */
-    --copy-width:    560px;     /* feature text column width */
+    /* text sizes */
+    --h2-size:       56px;
+    --body-size:     20px;
+    --copy-width:    560px;
     --faq-head-size: 60px;
     --faq-q-size:    20px;
     --footer-word:   280px;
@@ -73,9 +70,7 @@ img {
     scroll-margin-top: 90px;
 }
 
-/* ============================================================
-   NAV
-   ============================================================ */
+/* --- NAV --- */
 
 .nav {
     position: fixed;
@@ -125,9 +120,7 @@ img {
     opacity: 1 !important;
 }
 
-/* ============================================================
-   HERO — orbit of avatars + central 3D flip card
-   ============================================================ */
+/* --- HERO --- */
 
 .hero {
     position: relative;
@@ -144,7 +137,6 @@ img {
     inset: 0;
 }
 
-/* avatar PNG already includes its coloured ring */
 .ball {
     position: absolute;
     aspect-ratio: 1 / 1;
@@ -159,6 +151,7 @@ img {
     -webkit-user-drag: none;
 }
 
+/* central logo — a 3D card that flips to the TestFlight link on hover */
 .zelu-ball {
     position: absolute;
     left: 50%;
@@ -260,25 +253,14 @@ img {
     .scroll-hint::after { animation: none; }
 }
 
-/* ============================================================
-   FEATURES — the wheel is planted inside the features section
-   (not the viewport), so you scroll past it like a normal object:
-
-   - In the hero it isn't visible yet (it lives below, in .story).
-   - Leaving the hero it rises into view; the sticky .story-stage
-     pins it in place while you scroll the 5 screens (only the
-     wheel rotates and the phone/text swap).
-   - When the screens end the stage releases and scrolls up with
-     the page, so the FAQ comes in while you still see the wheel's
-     lower edge for continuity.
-
-   .story is tall (scroll length); .story-stage is sticky and
-   holds the wheel + phone + the 5 stacked panels.
-   ============================================================ */
+/* --- FEATURES ---
+   The wheel lives inside .story (not the viewport).
+   .story-stage stays pinned while you scroll the 5 panels, then
+   releases so the FAQ scrolls in from below. */
 
 .story {
     position: relative;
-    height: 500vh;          /* scroll length = 5 screens */
+    height: 500vh;      /* 5 panels × 100vh */
 }
 
 .story-stage {
@@ -294,15 +276,14 @@ img {
     pointer-events: none;
 }
 
-/* animatable conic-gradient slice angles (active slice widens to 120deg) */
+/* CSS needs @property to animate conic-gradient angles */
 @property --w0 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 @property --w1 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 @property --w2 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 @property --w3 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 @property --w4 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 
-/* hub never moves — only .wheel (inside) spins, so the centring
-   translate can't drift with the rotation */
+/* .wheel-wrap is the fixed hub — only .wheel inside it rotates */
 .wheel-wrap {
     position: absolute;
     left: var(--wheel-x);
@@ -313,7 +294,7 @@ img {
     filter: drop-shadow(0 0 60px rgba(0, 0, 0, 0.35));
 }
 
-/* slice order clockwise from top: pink, green, yellow, blue, red */
+/* slices clockwise from top: pink → green → yellow → blue → red */
 .wheel {
     width: 100%;
     height: 100%;
@@ -332,11 +313,11 @@ img {
         --w3 0.7s ease,
         --w4 0.7s ease;
     background: conic-gradient(from -90deg,
-        var(--zelu-pink) 0deg var(--w0),
-        var(--zelu-green) var(--w0) calc(var(--w0) + var(--w1)),
-        var(--zelu-yellow) calc(var(--w0) + var(--w1)) calc(var(--w0) + var(--w1) + var(--w2)),
-        var(--zelu-blue) calc(var(--w0) + var(--w1) + var(--w2)) calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)),
-        var(--zelu-red) calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)) 360deg);
+        var(--zelu-pink)   0deg                                                  var(--w0),
+        var(--zelu-green)  var(--w0)                                             calc(var(--w0) + var(--w1)),
+        var(--zelu-yellow) calc(var(--w0) + var(--w1))                           calc(var(--w0) + var(--w1) + var(--w2)),
+        var(--zelu-blue)   calc(var(--w0) + var(--w1) + var(--w2))               calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)),
+        var(--zelu-red)    calc(var(--w0) + var(--w1) + var(--w2) + var(--w3))   360deg);
 }
 
 .panel {
@@ -416,9 +397,7 @@ img {
     .wheel, .wheel-wrap, .panel { transition: none; }
 }
 
-/* ============================================================
-   FAQ — accordion on a light card
-   ============================================================ */
+/* --- FAQ --- */
 
 .faq {
     position: relative;
@@ -490,6 +469,7 @@ img {
     color: #101717;
 }
 
+/* + icon that collapses to − when the item is open */
 .faq-icon {
     flex: none;
     width: 36px;
@@ -540,9 +520,7 @@ img {
     max-width: 90ch;
 }
 
-/* ============================================================
-   FOOTER — big wordmark + socials
-   ============================================================ */
+/* --- FOOTER --- */
 
 .site-footer {
     position: relative;
