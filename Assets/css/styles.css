@@ -191,8 +191,8 @@ img {
 
 .zb-back {
     transform: rotateY(180deg);
-    background: var(--zelu-red);
-    color: var(--zelu-cream);
+    background: var(--zelu-cream);
+    color: var(--zelu-bg);
     font-family: 'Bolota', 'Sora', sans-serif;
     font-size: 52px;
     line-height: 1;
