@@ -28,8 +28,8 @@
     --phone-h:    118vh;    /* phone height */
 
     /* text sizes */
-    --h2-size:       64px;
-    --body-size:     28px;
+    --h2-size:       58px;
+    --body-size:     24px;
     --copy-width:    788px;
     --faq-head-size: 60px;
     --faq-q-size:    28px;
@@ -367,8 +367,6 @@ img {
     font-weight: 240;
     font-size: var(--h2-size);
     line-height: normal;
-    letter-spacing: 0.38px;
-    font-feature-settings: 'liga' off, 'clig' off;
     text-transform: uppercase;
 }
 
@@ -378,7 +376,6 @@ img {
     font-size: var(--body-size);
     line-height: 34px;
     letter-spacing: 0.38px;
-    font-feature-settings: 'liga' off, 'clig' off;
 }
 
 .panel-phone {
