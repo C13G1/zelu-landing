@@ -4,39 +4,39 @@
    ============================================================ */
 
 @font-face {
-  font-family: 'Bolota';
-  src: url('../fonts/Bolota.ttf') format('truetype');
-  font-display: swap;
+    font-family: 'Bolota';
+    src: url('../fonts/Bolota.ttf') format('truetype');
+    font-display: swap;
 }
 
 :root {
-  /* --- brand colours --- */
-  --zelu-bg:      #101717;
-  --zelu-red:     #df2a1d;
-  --zelu-blue:    #2196bc;
-  --zelu-yellow:  #d4930f;
-  --zelu-green:   #2bb673;
-  --zelu-pink:    #e23e6d;
-  --zelu-cream:   #fefff5;
+    /* --- brand colours --- */
+    --zelu-bg:      #101717;
+    --zelu-red:     #df2a1d;
+    --zelu-blue:    #2196bc;
+    --zelu-yellow:  #d4930f;
+    --zelu-green:   #2bb673;
+    --zelu-pink:    #e23e6d;
+    --zelu-cream:   #fefff5;
 
-  /* --- HERO --- */
-  --zelu-ball-size: clamp(240px, 33.5vw, 540px);  /* central flip card */
+    /* --- HERO --- */
+    --zelu-ball-size: 480px;    /* central flip card */
 
-  /* --- WHEEL + PHONE (Figma: wheel 0 = 1.85× phone height) --- */
-  --wheel-size: 166vh;           /* huge on purpose: hub sits off-screen, only a corner shows */
-  --wheel-x:    90.3vw;          /* wheel hub X — low-right corner (mostly off-screen) */
-  --wheel-y:    89vh;            /* wheel hub Y — low, so its edge still shows over the FAQ */
-  --phone-x:    62vw;            /* phone centre X — upper-left of the hub */
-  --phone-y:    48vh;            /* phone centre Y */
-  --phone-h:    90vh;            /* phone height */
+    /* --- WHEEL + PHONE (Figma: wheel diameter = 1.85x phone height) --- */
+    --wheel-size: 166vh;        /* huge on purpose: hub sits off-screen, only a corner shows */
+    --wheel-x:    90.3vw;       /* wheel hub X — low-right corner (mostly off-screen) */
+    --wheel-y:    89vh;         /* wheel hub Y — low, so its edge still shows over the FAQ */
+    --phone-x:    62vw;         /* phone centre X — upper-left of the hub */
+    --phone-y:    48vh;         /* phone centre Y */
+    --phone-h:    90vh;         /* phone height */
 
-  /* --- TEXT SIZES (one place to tune every heading/body) --- */
-  --h2-size:        clamp(34px, 4.4vw, 60px);   /* feature headings */
-  --body-size:      clamp(16px, 1.7vw, 26px);   /* feature paragraphs */
-  --copy-width:     min(560px, 40vw);           /* feature text column width */
-  --faq-head-size:  clamp(32px, 5vw, 64px);
-  --faq-q-size:     clamp(16px, 1.5vw, 22px);
-  --footer-word:    clamp(72px, 20vw, 300px);
+    /* --- TEXT SIZES (one place to tune every heading/body) --- */
+    --h2-size:       56px;      /* feature headings */
+    --body-size:     20px;      /* feature paragraphs */
+    --copy-width:    560px;     /* feature text column width */
+    --faq-head-size: 60px;
+    --faq-q-size:    20px;
+    --footer-word:   280px;
 }
 
 * {
@@ -57,6 +57,7 @@ html, body {
     color: var(--zelu-cream);
 }
 
+/* Ignite framework overrides */
 .container, .container-fluid, .ig-main-content {
     max-width: 100% !important;
     width: 100% !important;
@@ -72,21 +73,25 @@ img {
     scroll-margin-top: 90px;
 }
 
-/* ===================== NAV ===================== */
+/* ============================================================
+   NAV
+   ============================================================ */
+
 .nav {
     position: fixed;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     right: 0;
     z-index: 50;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.2rem clamp(1.2rem, 4vw, 3.5rem);
+    padding: 1.2rem 3rem;
 }
 
 .nav-brand {
-    font-family: 'Bolota','Sora',sans-serif;
-    font-size: clamp(20px,1.8vw,30px);
+    font-family: 'Bolota', 'Sora', sans-serif;
+    font-size: 24px;
     color: var(--zelu-cream);
     text-decoration: none;
 }
@@ -94,143 +99,500 @@ img {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: clamp(1rem,2.6vw,2.6rem);
+    gap: 2rem;
 }
 
 .nav-links a {
     color: var(--zelu-cream);
     text-decoration: none;
-    font-size: clamp(12px,0.95vw,15px);
-    font-weight: 700; letter-spacing: 0.08em;
-    text-transform: uppercase; opacity: 0.85;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
     transition: opacity 0.2s;
 }
 
-.nav-links a:hover { opacity: 1; }
+.nav-links a:hover {
+    opacity: 1;
+}
 
-.nav-cta { background: var(--zelu-red); color: var(--zelu-cream) !important; padding: 0.6em 1.3em; border-radius: 999px; opacity: 1 !important; }
+.nav-cta {
+    background: var(--zelu-red);
+    color: var(--zelu-cream) !important;
+    padding: 0.6em 1.3em;
+    border-radius: 999px;
+    opacity: 1 !important;
+}
 
 /* ============================================================
    HERO — orbit of avatars + central 3D flip card
    ============================================================ */
 
-.hero { position: relative; z-index: 2; width: 100%; height: 100vh; min-height: 640px; overflow: hidden; background: var(--zelu-bg); }
-.orbit { position: absolute; inset: 0; }
+.hero {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    min-height: 640px;
+    overflow: hidden;
+    background: var(--zelu-bg);
+}
 
-/* the avatar PNG already includes its coloured ring, so the ball is just the image */
-.ball { position: absolute; aspect-ratio: 1/1; will-change: transform; z-index: 2; }
-.ball img { width: 100%; height: 100%; pointer-events: none; -webkit-user-drag: none; }
+.orbit {
+    position: absolute;
+    inset: 0;
+}
 
-.zelu-ball { position: absolute; left: 50%; top: 50%; width: var(--zelu-ball-size); transform: translate(-50%, -50%); aspect-ratio: 1/1; perspective: 1400px; z-index: 6; text-decoration: none; }
-.zb-inner { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.6,0.2,0.1,1); }
-.zelu-ball:hover .zb-inner, .zelu-ball:focus-visible .zb-inner { transform: rotateY(180deg); }
-.zb-face { position: absolute; inset: 0; border-radius: 50%; backface-visibility: hidden; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.zb-front img { width: 100%; height: 100%; }
-.zb-back { transform: rotateY(180deg); background: var(--zelu-red); color: var(--zelu-cream); font-family: 'Bolota','Sora',sans-serif; font-size: clamp(28px,3.6vw,58px); line-height: 1; text-align: center; flex-direction: column; gap: 0.18em; }
-.zb-back small { font-family: 'Sora'; font-weight: 700; font-size: 0.28em; opacity: 0.85; letter-spacing: 0.18em; text-transform: uppercase; }
+/* avatar PNG already includes its coloured ring */
+.ball {
+    position: absolute;
+    aspect-ratio: 1 / 1;
+    will-change: transform;
+    z-index: 2;
+}
 
-.scroll-hint { position: absolute; left: 50%; bottom: 3vh; transform: translateX(-50%); z-index: 7; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.55; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-.scroll-hint::after { content: ''; width: 1px; height: 26px; background: var(--zelu-cream); animation: hintpulse 1.6s ease-in-out infinite; }
-@keyframes hintpulse { 0%,100% { opacity: 0.2; transform: scaleY(0.5); } 50% { opacity: 1; transform: scaleY(1); } }
+.ball img {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.zelu-ball {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--zelu-ball-size);
+    transform: translate(-50%, -50%);
+    aspect-ratio: 1 / 1;
+    perspective: 1400px;
+    z-index: 6;
+    text-decoration: none;
+}
+
+.zb-inner {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.6, 0.2, 0.1, 1);
+}
+
+.zelu-ball:hover .zb-inner,
+.zelu-ball:focus-visible .zb-inner {
+    transform: rotateY(180deg);
+}
+
+.zb-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.zb-front img {
+    width: 100%;
+    height: 100%;
+}
+
+.zb-back {
+    transform: rotateY(180deg);
+    background: var(--zelu-red);
+    color: var(--zelu-cream);
+    font-family: 'Bolota', 'Sora', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    text-align: center;
+    flex-direction: column;
+    gap: 0.18em;
+}
+
+.zb-back small {
+    font-family: 'Sora';
+    font-weight: 700;
+    font-size: 0.28em;
+    opacity: 0.85;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.scroll-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 3vh;
+    transform: translateX(-50%);
+    z-index: 7;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 26px;
+    background: var(--zelu-cream);
+    animation: hintpulse 1.6s ease-in-out infinite;
+}
+
+@keyframes hintpulse {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scaleY(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .zb-inner { transition: none; }
-  .scroll-hint::after { animation: none; }
+    .zb-inner { transition: none; }
+    .scroll-hint::after { animation: none; }
 }
+
 /* ============================================================
-   FEATURES — the wheel is PLANTED inside the features section (not the
-   viewport), so you scroll *past* it like a normal page object:
+   FEATURES — the wheel is planted inside the features section
+   (not the viewport), so you scroll past it like a normal object:
 
-   - In the hero it isn't reached yet (it lives below, in .story).
-   - Leaving the hero it rises into view and the sticky .story-stage PINS
-     it in place; it sits still there (only spinning) while you scroll the
-     5 screens (the phone/text swap, the wheel rotates).
-   - When the screens end the stage releases and scrolls up with the page,
-     so the FAQ comes in and you still catch the wheel's lower edge.
-   It is anchored to its X/Y and never travels with the viewport.
+   - In the hero it isn't visible yet (it lives below, in .story).
+   - Leaving the hero it rises into view; the sticky .story-stage
+     pins it in place while you scroll the 5 screens (only the
+     wheel rotates and the phone/text swap).
+   - When the screens end the stage releases and scrolls up with
+     the page, so the FAQ comes in while you still see the wheel's
+     lower edge for continuity.
 
-   .story is tall (scroll length); .story-stage is sticky and holds the
-   wheel + phone + the 5 stacked panels (only the active one shown).
+   .story is tall (scroll length); .story-stage is sticky and
+   holds the wheel + phone + the 5 stacked panels.
    ============================================================ */
 
-.story { position: relative; height: 500vh; }   /* scroll length = 5 screens */
-.story-stage { position: sticky; top: 0; height: 100vh; }
+.story {
+    position: relative;
+    height: 500vh;          /* scroll length = 5 screens */
+}
 
-/* the wheel lives inside the pinned stage (absolute), so it stays put with
-   the stage and leaves with it — never glued to the viewport */
-.wheel-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.story-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
 
-/* animatable conic-gradient slice angles (active slice widens) */
+.wheel-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* animatable conic-gradient slice angles (active slice widens to 120deg) */
 @property --w0 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 @property --w1 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 @property --w2 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 @property --w3 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 @property --w4 { syntax: '<angle>'; inherits: false; initial-value: 72deg; }
 
-/* hub is parked here and NEVER moves — only .wheel (inside) spins, so the
-   centring translate can't drift with the rotation. */
+/* hub never moves — only .wheel (inside) spins, so the centring
+   translate can't drift with the rotation */
 .wheel-wrap {
-  position: absolute;
-  left: var(--wheel-x); top: var(--wheel-y);
-  width: var(--wheel-size); height: var(--wheel-size);
-  transform: translate(-50%,-50%);
-  filter: drop-shadow(0 0 60px rgba(0,0,0,0.35));
-}
-/* slice order clockwise from top: pink, green, yellow, blue, red.
-   app.js rotates this element about its centre + sets the active slice to
-   120deg (others 60deg). */
-.wheel {
-  width: 100%; height: 100%; border-radius: 50%;
-  --w0: 72deg; --w1: 72deg; --w2: 72deg; --w3: 72deg; --w4: 72deg;
-  transform: rotate(0deg);
-  transition: transform 0.7s cubic-bezier(0.5,0.1,0.2,1), --w0 0.7s ease, --w1 0.7s ease, --w2 0.7s ease, --w3 0.7s ease, --w4 0.7s ease;
-  background: conic-gradient(from -90deg,
-    var(--zelu-pink) 0deg                                                  var(--w0),
-    var(--zelu-green)   var(--w0)                                             calc(var(--w0) + var(--w1)),
-    var(--zelu-yellow)  calc(var(--w0) + var(--w1))                           calc(var(--w0) + var(--w1) + var(--w2)),
-    var(--zelu-blue)    calc(var(--w0) + var(--w1) + var(--w2))               calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)),
-    var(--zelu-red)     calc(var(--w0) + var(--w1) + var(--w2) + var(--w3))   360deg);
+    position: absolute;
+    left: var(--wheel-x);
+    top: var(--wheel-y);
+    width: var(--wheel-size);
+    height: var(--wheel-size);
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 0 60px rgba(0, 0, 0, 0.35));
 }
 
-/* ----- panels: stacked, only the active one visible ----- */
-.panel { position: absolute; inset: 0; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
-.panel.is-active { opacity: 1; pointer-events: auto; }
-.panel-copy { position: absolute; left: 8vw; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; align-items: flex-start; gap: clamp(18px, 3vw, 40px); width: var(--copy-width); z-index: 3; }
-.panel-tag { display: inline-flex; align-items: center; gap: 0.5em; font-size: clamp(11px,0.9vw,14px); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; }
-.panel-tag::before { content: ''; width: 0.85em; height: 0.85em; border-radius: 50%; background: var(--accent, var(--zelu-red)); }
-.panel-copy h2 { font-family: 'Bolota','Sora',sans-serif; font-weight: 240; font-size: var(--h2-size); line-height: 1.0; text-transform: uppercase; }
-.panel-copy p { font-family: 'Sora',sans-serif; font-weight: 400; font-size: var(--body-size); line-height: 1.21; letter-spacing: 0.38px; opacity: 0.92; }
-.panel-phone { position: absolute; left: var(--phone-x); top: var(--phone-y); transform: translate(-50%,-50%); height: var(--phone-h); width: auto; z-index: 2; filter: drop-shadow(0 24px 50px rgba(0,0,0,0.5)); }
+/* slice order clockwise from top: pink, green, yellow, blue, red */
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    --w0: 72deg;
+    --w1: 72deg;
+    --w2: 72deg;
+    --w3: 72deg;
+    --w4: 72deg;
+    transform: rotate(0deg);
+    transition:
+        transform 0.7s cubic-bezier(0.5, 0.1, 0.2, 1),
+        --w0 0.7s ease,
+        --w1 0.7s ease,
+        --w2 0.7s ease,
+        --w3 0.7s ease,
+        --w4 0.7s ease;
+    background: conic-gradient(from -90deg,
+        var(--zelu-pink) 0deg var(--w0),
+        var(--zelu-green) var(--w0) calc(var(--w0) + var(--w1)),
+        var(--zelu-yellow) calc(var(--w0) + var(--w1)) calc(var(--w0) + var(--w1) + var(--w2)),
+        var(--zelu-blue) calc(var(--w0) + var(--w1) + var(--w2)) calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)),
+        var(--zelu-red) calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)) 360deg);
+}
+
+.panel {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.panel.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.panel-copy {
+    position: absolute;
+    left: 8vw;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    width: var(--copy-width);
+    z-index: 3;
+}
+
+.panel-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+
+.panel-tag::before {
+    content: '';
+    width: 0.85em;
+    height: 0.85em;
+    border-radius: 50%;
+    background: var(--accent, var(--zelu-red));
+}
+
+.panel-copy h2 {
+    font-family: 'Bolota', 'Sora', sans-serif;
+    font-weight: 240;
+    font-size: var(--h2-size);
+    line-height: 1.0;
+    text-transform: uppercase;
+}
+
+.panel-copy p {
+    font-family: 'Sora', sans-serif;
+    font-weight: 400;
+    font-size: var(--body-size);
+    line-height: 1.21;
+    letter-spacing: 0.38px;
+    opacity: 0.92;
+}
+
+.panel-phone {
+    position: absolute;
+    left: var(--phone-x);
+    top: var(--phone-y);
+    transform: translate(-50%, -50%);
+    height: var(--phone-h);
+    width: auto;
+    z-index: 2;
+    filter: drop-shadow(0 24px 50px rgba(0, 0, 0, 0.5));
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .wheel, .wheel-wrap, .panel { transition: none; }
+    .wheel, .wheel-wrap, .panel { transition: none; }
 }
+
 /* ============================================================
-   FAQ — accordion on a light card (no wheel behind it anymore)
+   FAQ — accordion on a light card
    ============================================================ */
 
-.faq { position: relative; z-index: 1; padding: clamp(3rem,9vh,8rem) clamp(1rem,4vw,3rem) clamp(4rem,10vh,9rem); }
-.faq-list { position: relative; display: flex; flex-direction: column; align-items: center; gap: clamp(28px,4vw,57px); width: min(1325px, 94vw); margin: 0 auto; padding: clamp(22px,3.4vw,36px) clamp(1.4rem,3vw,3rem); border-radius: clamp(28px,5vw,68px); background: rgba(254,255,245,0.84); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
-.faq-head { width: min(788px, 100%); color: #101717; font-family: 'Bolota','Sora',sans-serif; font-weight: 240; font-size: var(--faq-head-size); line-height: 1.0; text-transform: uppercase; }
-.faq-items { display: flex; flex-direction: column; align-items: flex-start; gap: clamp(18px,2.4vw,31px); width: min(1161px, 100%); }
-.faq-item { width: 100%; border-bottom: 1px solid rgba(16,23,23,0.16); padding-bottom: clamp(18px,2.4vw,31px); }
-.faq-item:last-child { border-bottom: none; padding-bottom: 0; }
-.faq-q { width: 100%; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 0; font-family: 'Sora',sans-serif; font-weight: 700; text-align: left; font-size: var(--faq-q-size); color: #101717; }
-.faq-icon { flex: none; width: clamp(30px,2.6vw,40px); height: clamp(30px,2.6vw,40px); border-radius: 50%; border: 1.6px solid #101717; position: relative; }
-.faq-icon::before, .faq-icon::after { content: ''; position: absolute; left: 50%; top: 50%; background: #101717; border-radius: 2px; }
-.faq-icon::before { width: 44%; height: 2px; transform: translate(-50%,-50%); }
-.faq-icon::after { width: 2px; height: 44%; transform: translate(-50%,-50%) scaleY(1); transition: transform 0.3s ease; }
-.faq-item.open .faq-icon::after { transform: translate(-50%,-50%) scaleY(0); }
-.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-.faq-a p { padding-top: clamp(12px,1.6vw,18px); color: rgba(16,23,23,0.74); font-size: clamp(14px,1.2vw,18px); line-height: 1.55; max-width: 90ch; }
+.faq {
+    position: relative;
+    z-index: 1;
+    padding: 7rem 3rem 8rem;
+}
+
+.faq-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    width: 100%;
+    max-width: 1325px;
+    margin: 0 auto;
+    padding: 32px 40px;
+    border-radius: 56px;
+    background: rgba(254, 255, 245, 0.84);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.faq-head {
+    width: 100%;
+    max-width: 788px;
+    color: #101717;
+    font-family: 'Bolota', 'Sora', sans-serif;
+    font-weight: 240;
+    font-size: var(--faq-head-size);
+    line-height: 1.0;
+    text-transform: uppercase;
+}
+
+.faq-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    width: 100%;
+    max-width: 1161px;
+}
+
+.faq-item {
+    width: 100%;
+    border-bottom: 1px solid rgba(16, 23, 23, 0.16);
+    padding-bottom: 28px;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    text-align: left;
+    font-size: var(--faq-q-size);
+    color: #101717;
+}
+
+.faq-icon {
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.6px solid #101717;
+    position: relative;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: #101717;
+    border-radius: 2px;
+}
+
+.faq-icon::before {
+    width: 44%;
+    height: 2px;
+    transform: translate(-50%, -50%);
+}
+
+.faq-icon::after {
+    width: 2px;
+    height: 44%;
+    transform: translate(-50%, -50%) scaleY(1);
+    transition: transform 0.3s ease;
+}
+
+.faq-item.open .faq-icon::after {
+    transform: translate(-50%, -50%) scaleY(0);
+}
+
+.faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.faq-a p {
+    padding-top: 16px;
+    color: rgba(16, 23, 23, 0.74);
+    font-size: 17px;
+    line-height: 1.55;
+    max-width: 90ch;
+}
+
 /* ============================================================
    FOOTER — big wordmark + socials
    ============================================================ */
 
-.site-footer { position: relative; z-index: 2; background: var(--zelu-bg); padding: clamp(3rem,7vh,7rem) clamp(1.5rem,6vw,6rem) clamp(2rem,4vh,4rem); display: flex; align-items: center; justify-content: flex-start; gap: clamp(1.5rem,5vw,5rem); flex-wrap: wrap; }
-.footer-word { font-family: 'Bolota','Sora',sans-serif; color: var(--zelu-cream); font-size: var(--footer-word); line-height: 0.78; letter-spacing: -0.02em; }
-.footer-social { display: flex; flex-direction: column; gap: clamp(1rem,2vw,1.8rem); align-items: flex-start; }
-.footer-social a { display: flex; align-items: center; gap: clamp(0.6rem,1.2vw,1.1rem); color: var(--zelu-cream); text-decoration: none; font-weight: 700; font-size: clamp(20px,2.5vw,36px); }
-.footer-social a:hover { opacity: 0.8; }
-.footer-social svg { width: clamp(52px,6.7vw,96px); height: clamp(52px,6.7vw,96px); color: var(--zelu-cream); flex: none; }
-.footer-social .ic-ig { width: clamp(48px,6.2vw,88px); height: clamp(48px,6.2vw,88px); }
+.site-footer {
+    position: relative;
+    z-index: 2;
+    background: var(--zelu-bg);
+    padding: 6rem 6rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.footer-word {
+    font-family: 'Bolota', 'Sora', sans-serif;
+    color: var(--zelu-cream);
+    font-size: var(--footer-word);
+    line-height: 0.78;
+    letter-spacing: -0.02em;
+}
+
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    align-items: flex-start;
+}
+
+.footer-social a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--zelu-cream);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 32px;
+}
+
+.footer-social a:hover {
+    opacity: 0.8;
+}
+
+.footer-social svg {
+    width: 80px;
+    height: 80px;
+    color: var(--zelu-cream);
+    flex: none;
+}
+
+.footer-social .ic-ig {
+    width: 72px;
+    height: 72px;
+}
