@@ -20,12 +20,12 @@
     --zelu-ball-size: 480px;
 
     /* wheel + phone */
-    --wheel-size: 156vh;    /* ≈ Figma 1401px; hub off-screen down-right, only the edge shows */
-    --wheel-x:    90.3vw;   /* hub X position */
-    --wheel-y:    89vh;     /* hub Y position */
-    --phone-x:    80vw;     /* phone centre X */
-    --phone-y:    38vh;     /* phone centre Y */
-    --phone-h:    150vh;    /* phone height (device ≈ Figma 473×951) */
+    --wheel-size: 132vh;    /* hub off-screen down-right, only the edge shows */
+    --wheel-x:    78vw;     /* hub X position */
+    --wheel-y:    86vh;     /* hub Y position */
+    --phone-x:    70vw;     /* phone centre X */
+    --phone-y:    54vh;     /* phone centre Y */
+    --phone-h:    118vh;    /* phone height */
 
     /* text sizes */
     --h2-size:       64px;
@@ -333,7 +333,7 @@ img {
 .panel-copy {
     position: absolute;
     left: 8vw;
-    top: 50%;
+    top: 34%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
