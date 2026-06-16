@@ -298,12 +298,14 @@ img {
         --w2 0.7s ease,
         --w3 0.7s ease,
         --w4 0.7s ease;
-    background: conic-gradient(from -90deg,
-        var(--zelu-pink)   0deg                                                  var(--w0),
-        var(--zelu-green)  var(--w0)                                             calc(var(--w0) + var(--w1)),
-        var(--zelu-red)    calc(var(--w0) + var(--w1))                           calc(var(--w0) + var(--w1) + var(--w2)),
-        var(--zelu-yellow) calc(var(--w0) + var(--w1) + var(--w2))               calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)),
-        var(--zelu-blue)   calc(var(--w0) + var(--w1) + var(--w2) + var(--w3))   360deg);
+    background: conic-gradient(
+        from -90deg,
+        var(--zelu-pink) 0deg var(--w0),
+        var(--zelu-green) var(--w0) calc(var(--w0) + var(--w1)),
+        var(--zelu-red) calc(var(--w0) + var(--w1)) calc(var(--w0) + var(--w1) + var(--w2)),
+        var(--zelu-yellow) calc(var(--w0) + var(--w1) + var(--w2)) calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)),
+        var(--zelu-blue) calc(var(--w0) + var(--w1) + var(--w2) + var(--w3)) 360deg
+    );
 }
 
 .panel {
