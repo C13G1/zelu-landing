@@ -148,7 +148,7 @@ img {
     -webkit-user-drag: none;
 }
 
-/* central logo — a 3D card that flips to the TestFlight link on hover */
+/* central logo - card that flips to the TestFlight link on hover */
 .zelu-ball {
     position: absolute;
     left: 50%;

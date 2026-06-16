@@ -13,7 +13,7 @@ struct HeroImage {
         self.img = img; self.x = x; self.y = y; self.size = size
     }
 
-    /// Place using Figma Dev-Mode X/Y — auto-converted to % against the
+    /// Place using Figma X/Y - auto-converted to % against the
     /// hero frame (width 1603 × height 966 in Figma). Just paste the numbers.
     init(img: String, figmaX: Double, figmaY: Double, size: Double? = nil) {
         self.img = img
@@ -97,14 +97,32 @@ let storyPanels: [Panel] = [
 // MARK: - FAQ
 
 let faqs: [(q: String, a: String)] = [
-    ("Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber.",
-     "Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber. Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber."),
-    ("Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber.",
-     "Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber. Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber."),
-    ("Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber.",
-     "Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber. Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber."),
-    ("Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber.",
-     "Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber. Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber."),
-    ("Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber.",
-     "Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber. Todo mundo que importa pra você reunido em um só lugar. O tamanho de cada bolha diz o quanto vocês têm se visto e quem está sumindo sem você perceber."),
+    ("O que é o Zelu?",
+     "Um app que ajuda você a manter contato com seus amigos. Você define quantas vezes quer encontrar cada amigo e o Zelu registra os encontros que acontecem pessoalmente. Encontrar fortalece a amizade no app e ficar sem se ver enfraquece."),
+    ("Como adiciono um amigo?",
+     "Pessoalmente. Quando você e seu amigo estão perto um do outro com o app aberto, os celulares se reconhecem e trocam os perfis."),
+    ("Preciso criar conta ou informar telefone e e-mail?",
+     "Não! Você só escolhe um nome e uma foto de perfil. Não pedimos cadastro, telefone nem e-mail."),
+    ("Como o app sabe que eu e meu amigo nos encontramos?",
+     "Os celulares se reconhecem, por bluetooth, quando vocês estão perto um do outro. Por isso o encontro só conta quando vocês estão juntos de verdade, não à distância."),
+    ("Como funciona a meta de encontros?",
+     "Para cada amigo você escolhe com que frequência quer se ver: toda semana, a cada 15 dias, uma vez por mês, a cada 3 meses, a cada 6 meses ou uma vez por ano. O app usa essa meta para mostrar se vocês estão se encontrando e quanto tempo falta para o próximo encontro."),
+    ("O que acontece se eu não me encontrar com um amigo?",
+     "A amizade vai enfraquecendo no app. Para fortalecer de novo, basta se encontrar com ele."),
+    ("O que é o vácuo?",
+     "Quando você não encontra um amigo durante muito tempo, a amizade vai para o vácuo. Se ela ficar muito tempo no vácuo, some do app. Para tê-la de volta, é preciso conectar com o amigo de novo e começar a amizade do zero."),
+    ("O que muda quando a amizade fica mais forte?",
+     "Cada amizade tem cinco níveis: Afastados, Distantes, Estáveis, Próximos e Inseparáveis. Quanto mais vocês se encontram, maior o nível e o tamanho da foto do amigo que aparece na tela principal."),
+    ("Meu amigo também precisa ter o Zelu?",
+     "Sim! Os dois precisam ter o app, porque é assim que os celulares trocam perfis e registram os encontros."),
+    ("Posso separar meus amigos em grupos?",
+     "Sim! Por exemplo: faculdade, trabalho ou infância, e o app mostra como está cada grupo. Esse recurso é pago: uma única compra de R$ 9,90 dentro do app. O resto do Zelu é gratuito."),
+    ("Meus dados ficam seguros?",
+     "Sim! Os dados das suas amizades ficam salvos no seu próprio dispositivo, não em servidores nossos, e não são compartilhados."),
+    ("O que preciso para usar o Zelu?",
+     "Qualquer iPhone com iOS 26.0 ou superior."),
+    ("O Zelu já está disponível?",
+     "Ainda não na App Store! Por enquanto está em teste gratuito pelo TestFlight — toque em Baixe agora para entrar."),
+    ("Tem versão para Android?",
+     "Não! Por enquanto o Zelu funciona só em iPhone."),
 ]

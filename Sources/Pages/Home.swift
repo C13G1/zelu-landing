@@ -2,7 +2,7 @@ import Foundation
 import Ignite
 
 /// The single landing page. Just composes the components in order.
-/// Edit content in Sources/Content.swift, sizes in Assets/css/base.css.
+/// Edit content in Sources/Content.swift, sizes in Assets/css/styles.css.
 struct Home: StaticPage {
     var title = "Zelu"
 
