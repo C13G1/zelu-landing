@@ -192,22 +192,11 @@ img {
 .zb-back {
     transform: rotateY(180deg);
     background: var(--zelu-cream);
-    color: var(--zelu-bg);
-    font-family: 'Bolota', 'Sora', sans-serif;
-    font-size: 52px;
-    line-height: 1;
-    text-align: center;
-    flex-direction: column;
-    gap: 0.18em;
 }
 
-.zb-back small {
-    font-family: 'Sora';
-    font-weight: 700;
-    font-size: 0.28em;
-    opacity: 0.85;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+.zb-back img {
+    width: 100%;
+    height: 100%;
 }
 
 .scroll-hint {

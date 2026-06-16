@@ -18,7 +18,7 @@ struct Hero: HTML {
                 <a class="zelu-ball" href="\(testflight)" target="_blank" rel="noopener" aria-label="teste já">
                   <span class="zb-inner">
                     <span class="zb-face zb-front"><img src="images/zelu-ball.svg" alt="Zelu"></span>
-                    <span class="zb-face zb-back">teste já<small>baixe agora</small></span>
+                    <span class="zb-face zb-back"><img src="images/zelu-ball-back.svg" alt="teste já"></span>
                   </span>
                 </a>
                 """
