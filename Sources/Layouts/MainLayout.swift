@@ -8,6 +8,7 @@ struct MainLayout: Layout {
     var body: some Document {
         Body {
             """
+            <link rel="icon" href="images/zelu-ball.svg" type="image/svg+xml">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
