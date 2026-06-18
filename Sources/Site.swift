@@ -15,7 +15,7 @@ struct IgniteWebsite {
 
 struct ZeluSite: Site {
     var name = "Zelu"
-    var url = URL(static: "https://c13g1.github.io/zelu-landing/")
+    var url = URL(static: "https://zelu.online")
     var homePage = Home()
     var layout = MainLayout()
 }

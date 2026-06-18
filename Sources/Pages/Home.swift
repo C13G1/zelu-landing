@@ -6,7 +6,7 @@ import Ignite
 struct Home: StaticPage {
     var title = "Zelu"
 
-    private let testflight = "https://testflight.apple.com/join/MuUJhqc9"
+    private let testflight = "https://apps.apple.com/br/app/zelu/id6772319658"
 
     var body: some HTML {
         Section {
